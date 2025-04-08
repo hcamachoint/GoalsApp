@@ -1,29 +1,23 @@
-import { StatusBar } from "expo-status-bar";
-import {
-  StyleSheet,
-  Text,
-  View,
-  Button,
-  TextInput,
-  ScrollView,
-  FlatList,
-} from "react-native";
-import { useState } from "react";
-import GoalItem from "./components/GoalItem";
-import GoalInput from "./components/GoalInput";
+import { useState } from 'react';
+import { StyleSheet, View, FlatList } from 'react-native';
+
+import GoalItem from './components/GoalItem';
+import GoalInput from './components/GoalInput';
 
 export default function App() {
   const [courseGoals, setCourseGoals] = useState([]);
 
   function addGoalHandler(enteredGoalText) {
-    setCourseGoals([
-      ...courseGoals,
+    setCourseGoals((currentCourseGoals) => [
+      ...currentCourseGoals,
       { text: enteredGoalText, id: Math.random().toString() },
     ]);
   }
 
-  function deleteGoalHandler() {
-    console.log("DELETE");
+  function deleteGoalHandler(id) {
+    setCourseGoals((currentCourseGoals) => {
+      return currentCourseGoals.filter((goal) => goal.id !== id);
+    });
   }
 
   return (
@@ -36,7 +30,8 @@ export default function App() {
             return (
               <GoalItem
                 text={itemData.item.text}
-                onDeleteItem={deleteGoalHandler()}
+                id={itemData.item.id}
+                onDeleteItem={deleteGoalHandler}
               />
             );
           }}
@@ -53,10 +48,10 @@ export default function App() {
 const styles = StyleSheet.create({
   appContainer: {
     flex: 1,
-    paddingTop: 30,
+    paddingTop: 50,
     paddingHorizontal: 16,
   },
   goalsContainer: {
-    flex: 9,
+    flex: 5,
   },
 });
