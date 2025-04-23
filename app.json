@@ -17,9 +17,10 @@
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/adaptive-icon.png",
+        "foregroundImage": "./assets/ic_launcher_foreground.png",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "package": "com.anonymous.GoalsApp"
     },
     "web": {
       "favicon": "./assets/favicon.png"
